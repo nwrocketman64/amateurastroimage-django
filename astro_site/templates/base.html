@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block main-title %}{{ title }} - Amateur Astro Image{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.zinc.min.css">
+    <link rel="stylesheet" href="{% static "/css/style.min.css" %}">
+    <link rel="shortcut icon" type="image/png" href="{% static "/img/favicon3.png" %}">
+    {% block addons %}{% endblock %}
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="{% url "index-page" %}" style="color: black;">Amateur Astro Image</a></li>
+            </ul>
+            <ul>
+                <li><a {% if '/home' in path %} id="thePage" {% endif %} href="{% url "index-page" %}">Home</a></li>
+                <li><a {% if '/images' in path %} id="thePage" {% endif %} href="{% url "astroimages-list" %}">Images</a></li>
+                <li><a {% if '/contact' in path %} id="thePage" {% endif %} href="{% url "contact-page" %}">Contact</a></li>
+                <li><a {% if '/about' in path %} id="thePage" {% endif %} href="{% url "about-page" %}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="container">
+        <small>
+            This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. | <a href="https://github.com/nwrocketman64/amateurastroimage-django">GitHub</a> | <a href="{% url "patch-notes-page" %}">Patch Notes</a>
+            <br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+        </small>
+    </footer>
+    {% block endAddon %}{% endblock %}
+</body>
+</html>

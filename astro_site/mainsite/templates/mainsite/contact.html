@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block addons %}
+<meta name="description" content="You can use this form to contact us if you have questions / comments. I will try out best to get back to as soon as I can.">
+<meta name="author" content="Amateur Astro Image Team">
+{% endblock %}
+
+{% block endAddon %}<script src="{% static "/js/formButton.min.js" %}"></script>{% endblock %}
+
+{% block content %}
+<section>
+    <h1>{{ title }}</h1>
+    <p>
+        You can use this form to contact me if you have
+        questions/comments or if you would like to use one of my images.
+        Make sure you fill in every item in the form.
+    </p>
+    <form action="{% url "contact-page" %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <div><button id="sendForm" type="submit">Send Comment</button></div>
+    </form>
+</section>
+{% endblock %}

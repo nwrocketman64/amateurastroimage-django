@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block main-title %}{{ title }} {{ image.object }} - Amateur Astro Image{% endblock %}
+
+{% block addons %}
+<meta name="description" content="{{ image.object }} - {{ image.comments }}">
+<meta name="author" content="Amateur Astro Image Team">
+{% endblock %}
+
+{% block content %}
+<section>
+    <article>
+    <h1>{{ title }} {{ image.object }}</h1>
+    <img src="{{ image.image_standard.url }}" alt="{{ image.object }} - {{ image.date | date }}">
+    </article>
+    <h2>Details for the Image</h2>
+    <table class="striped">
+        <tr>
+            <td>Object in the Image</td>
+            <td>{{ image.object }}</td>
+        </tr>
+        <tr>
+            <td>Date and Time</td>
+            <td><time datetime="{{ image.date_taken|date:"Y-m-dH:i:s" }}">{{ image.date_taken|date:"D, F j, Y, g:i a" }}</time></td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>{{ image.location }}</td>
+        </tr>
+        <tr>
+            <td>Telescope Used</td>
+            <td>{{ image.telescope }}</td>
+        </tr>
+        <tr>
+            <td>Other Comments</td>
+            <td>{{ image.comment }}</td>
+        </tr>
+    </table>
+    <p style="text-align: center;"><a role="button" href="{{ image.image.url }}" download>Full Size Download</a></p>
+</section>
+{% endblock %}

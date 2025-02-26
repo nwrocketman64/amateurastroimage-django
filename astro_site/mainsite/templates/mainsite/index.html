@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block main-title %}Amateur Astro Image{% endblock %}
+
+{% block addons %}
+<meta name="description" content="Welcome to my website, Amateur Astro Image, where I display all the images that I have to take through my telescopes.">
+<meta name="author" content="Amateur Astro Image Team">
+{% endblock %}
+
+{% block content %}
+<section>
+    <h1>{{ title }}</h1>
+    <p>
+        Welcome to my website, Amateur Astro Image, where I display
+        all the images that I have taken through my telescopes.
+    </p>
+    {% if image %}
+    <article>
+        <h2>The Latest Image</h2>
+        <img src="{{ image.image_standard.url }}" alt="{{ image.object }} - {{ image.date_taken|date:"F j, Y, g:i a" }}">
+        <br>
+        <small>
+            {{ image.object }} - taken on <time datetime="{{ image.date_taken|date:"Y-m-dH:i:s" }}">{{ image.date_taken|date:"F j, Y, g:i a" }}</time>
+        </small>
+        <p><a role="button" href="{% url "astroimage-details" image.id %}">Details</a></p>
+    </article>
+    {% endif %}
+</section>
+<section>
+    <h2>Images</h2>
+    <p>
+        This is the full list of images that I have taken
+        and stored on this site. From here, you can view
+        the details of the images and even download the
+        original copy.
+    </p>
+    <p><a role="button" href="{% url "astroimages-list" %}">Full List of Images</a></p>
+</section>
+<section>
+    <h2>Contact</h2>
+    <p>
+        Click here to use the contact form if you have any
+        questions about the content on this website or any
+        feedback that you want to give.
+    </p>
+    <p><a role="button" href="{% url "contact-page" %}">Contact Form</a></p>
+</section>
+<section>
+    <h2>About</h2>
+    <p>
+        This is the about page for the website. Here you
+        can see all the telescopes that use and the tools
+        that I use to capture each image.
+    </p>
+    <p><a role="button" href="{% url "about-page" %}">About</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block addons %}
+<meta name="description" content="These are full list of images that I have taken through my telescopes.">
+<meta name="author" content="Amateur Astro Image Team">
+{% endblock %}
+
+{% block content %}
+<section>
+    {% if images|length %}
+    <h1>List of Images</h1>
+    <div id="image-list">
+        {% for image in images %}
+        <article>
+            <img src="{{ image.image_thumb.url }}" alt="{{ image.object }} - {{ image.date_taken|date:"F j, Y, g:i a" }}">
+            <h6>{{ image.object }} | <time datetime="{{ image.date_taken|date:"Y-m-dH:i:s" }}">{{ image.date_taken|date:"m/d/Y" }}</time></h6>
+            <p><a role="button" href="{% url "astroimage-details" image.id %}">Details</a></p>
+        </article>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a class="left-button" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% endif %}
+        <div class="current-page">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</div>
+        {% if page_obj.has_next %}
+        <a class="right-button" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        {% endif %}
+    </div>
+    {% else %}
+    <h1>No Images</h1>
+    <p>There are no Images yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

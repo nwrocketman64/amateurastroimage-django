@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block addons %}
+<meta name="description" content="Welcome to my website. I have created this website because of my love of astronomy and astrophotography and I want to share many of the images that I have taken through my telescopes.">
+<meta name="author" content="Amateur Astro Image Team">
+{% endblock %}
+
+{% block content %}
+<section>
+    <h1>{{ title }}</h1>
+    <p>
+        Welcome to my website. I have created this website because of
+        my love of astronomy and astrophotography and I want to share
+        many of the images that I have taken through my telescopes. I
+        created this site because I love the hobby of star-gazing and
+        astrophotography and I like to share it with others.
+        The source code for this website is free to use and is
+        open-source under the Apache 2.0 License. The link to the
+        <a href="https://github.com/nwrocketman64/amateurastroimage-codebase">GitHub repo</a>
+        is in the footers. Feel free to clone the code for this
+        website and use it as part of your own projects. A log of the
+        patch notes can be found at this link, <a href="/patch-notes">Patch Notes</a>.
+    </p>
+    <img src="{% static "/img/telescope2-tmb.jpg" %}" alt="The moon and the telescope">
+    <hr>
+</section>
+<section>
+    <h2>Licensing</h2>
+    <p>
+        All images posted here are covered under the <a href="https://creativecommons.org/licenses/by/4.0/">
+        creative commons attribution 4.0 international license</a>. This
+        means that you can share the images that are on this site and
+        you can remix or build upon the images here even to use in
+        commercial products as long as you give credit to me as the
+        source of the images.
+    </p>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    <img src="{% static "/img/telescope7-tmb.jpg" %}" alt="Telescope at Patterson">
+    <hr>
+</section>
+<section>
+    <h2>Telescopes</h2>
+    <p>
+        Whenever you view the details of an image, you will see listed
+        in the details the telescope that was used to take the image.
+        Here are all the telescopes that I have in my collection.
+    </p>
+    <h3>Celestron NextStar 8</h3>
+    <img src="{% static "/img/telescope9-tmb.jpg" %}" alt="Celestron NextStar at Patterson">
+    <br>
+    <table class="striped">
+        <tr>
+            <td>Telescope Type</td>
+            <td>Schmidt-Cassegrains</td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td>8 inches</td>
+        </tr>
+        <tr>
+            <td>Focal Length</td>
+            <td>2032mm</td>
+        </tr>
+        <tr>
+            <td>Focal Length (With Starizona HyperStar)</td>
+            <td>390mm</td>
+        </tr>
+    </table>
+    <p><a role="button" href="https://www.celestron.com/products/nexstar-8se-computerized-telescope">Website</a></p>
+    <p>
+        <small>
+            * Because of the age of the telescope, I can only find the website for the more modern
+            version offered by Celestron. Also, the original mount was starting to fail, so I had
+            it removed and the tube modified so that it could fit on a different mount.
+        </small>
+    </p>
+    <hr>
+    <h3>Aurora Explore One</h3>
+    <img src="{% static "/img/telescope3-tmb.jpg" %}" alt="Aurora Explore One">
+    <br>
+    <table class="striped">
+        <tr>
+            <td>Telescope Type</td>
+            <td>Reflector</td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td>114mm</td>
+        </tr>
+        <tr>
+            <td>Focal Length</td>
+            <td>500mm, f/4</td>
+        </tr>
+    </table>
+    <p><a role="button" href="https://explorescientificusa.com/products/explore-one-aurora-telescope">Website</a></p>
+    <hr>
+    <h3>Orion SkyQuest XT6 Dobsonian</h3>
+    <img src="{% static "/img/telescope8-tmb.jpg" %}" alt="Celestron SkyQuest Dobsonian">
+    <br>
+    <table class="striped">
+        <tr>
+            <td>Telescope Type</td>
+            <td>Dobsonian</td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td>6 Inches</td>
+        </tr>
+        <tr>
+            <td>Focal Length</td>
+            <td>2000mm</td>
+        </tr>
+    </table>
+    <p><a role="button" href="https://orionstelescopes.com/orion-xt6-telescope/">Website</a></p>
+</section>
+{% endblock %}

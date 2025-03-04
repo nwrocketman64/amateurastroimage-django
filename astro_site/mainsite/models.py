@@ -38,20 +38,31 @@ class AstroImage(models.Model):
         # Return the correct string.
         return f"{self.object} taken on {local_time.strftime('%A, %b %d, %Y - %I:%M %p')}"
     
-
+    # The method controls how images are saved and add watermarks.
     def save(self, *args, **kwargs):
+        # Save image before adding the watermark.
         super().save(*args, **kwargs)
+
+        # Open the image.
         photo = Image.open(self.image.path)
         draw = ImageDraw.Draw(photo)
+
+        # Prepare font and get image size.
         font_size = 16
         font = ImageFont.load_default(font_size)
         width, height = photo.size
-        branding = "Amateur Astro Image"
+
+        # Prepare branding.
+        branding = f"{self.object} - Amateur Astro Image"
+
+        # Compute branding size and position.
         margin = 10
         textwidth = draw.textlength(branding, font)
         x = width - textwidth - margin
         y = height - font_size - margin
         draw.text((x, y), branding, (255, 255, 255), font=font)
+
+        # Update image.
         photo.save(self.image.path)
     
 

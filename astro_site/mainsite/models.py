@@ -81,7 +81,7 @@ class Request(models.Model):
     def __str__(self):
         # Convert from UTC time to the proper timezone.
         current_zone = timezone(settings.TIME_ZONE)
-        local_time = self.date_taken.astimezone(current_zone)
+        local_time = self.sent_time.astimezone(current_zone)
         
         # Return the correct string.
         return f"{self.first_name} {self.last_name} on {local_time.strftime('%A, %b %d, %Y - %I:%M %p')}"

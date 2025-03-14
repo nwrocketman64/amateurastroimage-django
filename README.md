@@ -12,6 +12,7 @@ DATABASE_PORT=
 TIMEZONE=
 SECRET_KEY=
 DEBUG_SET=
+HTTPS=
 ```
 Add all the database information, set the timezone, and set Debug to false. Run this code in the Python shell to generate a secret key.
 ```
@@ -32,6 +33,10 @@ You can run the instance locally using this command.
 ```
 python3 manage.py runserver
 ```
+With Django Extensions, you can run the development server with HTTPS
+```
+python manage.py runserver_plus --cert-file cert.pem --key-file key.pem
+```
 
 # Development Environment
 I used [VS code](https://code.visualstudio.com/) as the main IDE for creating the source code. I used [MariaDB](https://mariadb.org/) in both the development and production. Microsoft Edge and Mozilla FireFox where the main web browser that I tested this website on.
@@ -42,6 +47,7 @@ The key libraries used in this project.
 * [Python Django](https://www.djangoproject.com/) - The main backend web framework.
 * [Django Cleanup](https://pypi.org/project/django-cleanup/) - Used to clean up images with records deleted from database.
 * [Django Environ](https://pypi.org/project/django-environ/) - Used to load configurations into the enviroment.
+* [Django Extensions](https://pypi.org/project/django-extensions/) - Adds development extenstions to the Python Django Framework.
 * [Django ImageKit](https://pypi.org/project/django-imagekit/) - Used to create cached thumbnails of the image.
 * [Django Simple Captcha](https://pypi.org/project/django-simple-captcha/) - Provided basic ReCaptcha for the contact form.
 * [MySQL Client](https://pypi.org/project/mysqlclient/) - Provides a connection to the MariaDB database.

@@ -17,7 +17,7 @@
     <header class="container">
         <nav>
             <ul>
-                <li><a href="{% url "index-page" %}" style="color: black;">Amateur Astro Image</a></li>
+                <li><a href="{% url "index-page" %}" id="header-name">Amateur Astro Image</a></li>
             </ul>
             <ul>
                 <li><a {% if '/home' in path %} id="thePage" {% endif %} href="{% url "index-page" %}">Home</a></li>
@@ -34,7 +34,7 @@
     <footer class="container">
         <small>
             This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. | <a href="https://github.com/nwrocketman64/amateurastroimage-django">GitHub</a> | <a href="{% url "patch-notes-page" %}">Patch Notes</a>
-            <br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+            <br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
         </small>
     </footer>
     {% block endAddon %}{% endblock %}

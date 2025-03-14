@@ -7,6 +7,10 @@ body {
     color: black;
 }
 
+#header-name{
+    color: black;
+}
+
 textarea {
     resize: none;
 }

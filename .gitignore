@@ -169,3 +169,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+astro_site/cert.key
+astro_site/cert.crt

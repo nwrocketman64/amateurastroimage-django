@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'mainsite',
     'captcha',
     'imagekit',
+    'csp',
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'csp.middleware.CSPMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -146,7 +149,41 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR / 'bucket'
 MEDIA_URL = '/media/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Session Cookies
+SESSION_COOKIE_SECURE = env('HTTPS') == 'TRUE'    # Ensures session cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = env('HTTPS') == 'TRUE'       # Ensures CSRF cookies are only sent over HTTPS
+SESSION_COOKIE_HTTPONLY = env('HTTPS') == 'TRUE'  # Prevents JavaScript access to session cookies
+
+
+# HSTS Settings.
+SECURE_HSTS_SECONDS = 31536000                             # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env('HTTPS') == 'TRUE'    # Apply HSTS to subdomains
+SECURE_HSTS_PRELOAD = env('HTTPS') == 'TRUE'               # Allow preloading into browsers
+SECURE_SSL_REDIRECT = env('HTTPS') == 'TRUE'               # Redirect HTTP to HTTPS
+
+
+# CSP Configuration (Enforced, no reporting)
+CSP_DEFAULT_SRC = ("'self'",)  # Default to same-origin only (amateurastroimage.com)
+CSP_SCRIPT_SRC = ("'self'",)   # All JavaScripts are local (e.g., /static/mainsite/js/...)
+CSP_STYLE_SRC = (
+    "'self'",                  # Local styles (/static/mainsite/css/style.min.css)
+    "https://fonts.googleapis.com",  # Google Fonts CSS
+    "https://cdn.jsdelivr.net",      # Pico CSS
+)
+CSP_IMG_SRC = (
+    "'self'",                         # Local images (/media/..., /static/...)
+    "https://i.creativecommons.org",  # Creative Commons badge
+    "https://licensebuttons.net",     # Added for Creative Commons image
+)
+CSP_FONT_SRC = (
+    "'self'",                  # Local fonts (if any)
+    "https://fonts.gstatic.com",  # Google Fonts font files
+)
+CSP_CONNECT_SRC = ("'self'",)  # Local API calls (no external APIs detected)

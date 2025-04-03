@@ -170,20 +170,24 @@ SECURE_SSL_REDIRECT = env('HTTPS') == 'TRUE'               # Redirect HTTP to HT
 
 
 # CSP Configuration (Enforced, no reporting)
-CSP_DEFAULT_SRC = ("'self'",)  # Default to same-origin only (amateurastroimage.com)
-CSP_SCRIPT_SRC = ("'self'",)   # All JavaScripts are local (e.g., /static/mainsite/js/...)
-CSP_STYLE_SRC = (
-    "'self'",                  # Local styles (/static/mainsite/css/style.min.css)
-    "https://fonts.googleapis.com",  # Google Fonts CSS
-    "https://cdn.jsdelivr.net",      # Pico CSS
-)
-CSP_IMG_SRC = (
-    "'self'",                         # Local images (/media/..., /static/...)
-    "https://i.creativecommons.org",  # Creative Commons badge
-    "https://licensebuttons.net",     # Added for Creative Commons image
-)
-CSP_FONT_SRC = (
-    "'self'",                  # Local fonts (if any)
-    "https://fonts.gstatic.com",  # Google Fonts font files
-)
-CSP_CONNECT_SRC = ("'self'",)  # Local API calls (no external APIs detected)
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'default-src': ("'self'",),  # Default to same-origin only (amateurastroimage.com)
+        'script-src': ("'self'",),   # All JavaScripts are local (e.g., /static/mainsite/js/...)
+        'style-src': (
+            "'self'",                  # Local styles (/static/mainsite/css/style.min.css)
+            "https://fonts.googleapis.com",  # Google Fonts CSS
+            "https://cdn.jsdelivr.net",      # Pico CSS
+        ),
+        'img-src': (
+            "'self'",                         # Local images (/media/..., /static/...)
+            "https://i.creativecommons.org",  # Creative Commons badge
+            "https://licensebuttons.net",     # Added for Creative Commons image
+        ),
+        'font-src': (
+            "'self'",                  # Local fonts (if any)
+            "https://fonts.gstatic.com",  # Google Fonts font files
+        ),
+        'connect-src': ("'self'",),  # Local API calls (no external APIs detected)
+    }
+}

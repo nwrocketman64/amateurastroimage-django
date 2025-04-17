@@ -73,6 +73,10 @@ footer {
     gap: 15px;
 }
 
+.download-button-container {
+    text-align: center;
+}
+
 /* Tablet Size Viewports */
 @media only screen and (min-width: 37em) {
     /* Code for the image list page */

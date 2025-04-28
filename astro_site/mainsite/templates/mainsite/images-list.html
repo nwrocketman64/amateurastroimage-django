@@ -9,6 +9,12 @@
 <section>
     {% if images|length %}
     <h1>List of Images</h1>
+    <form method="get" action="{% url 'astroimages-list' %}" class="search-form">
+        <div class="grid">
+            <input type="search" name="q" placeholder="Search images..." value="{{ search_query }}" aria-label="Search">
+            <button type="submit">Search</button>
+        </div>
+    </form>
     <div id="image-list">
         {% for image in images %}
         <article>
@@ -20,16 +26,16 @@
     </div>
     <div class="pagination">
         {% if page_obj.has_previous %}
-        <a class="left-button" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        <a class="left-button" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&lt;</a>
         {% endif %}
         <div class="current-page">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</div>
         {% if page_obj.has_next %}
-        <a class="right-button" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        <a class="right-button" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&gt;</a>
         {% endif %}
     </div>
     {% else %}
     <h1>No Images</h1>
-    <p>There are no Images yet.</p>
+    <p>No images found{% if search_query %} matching "{{ search_query }}"{% endif %}.</p>
     {% endif %}
 </section>
 {% endblock %}

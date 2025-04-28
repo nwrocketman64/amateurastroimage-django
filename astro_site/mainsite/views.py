@@ -1,6 +1,7 @@
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView
+from django.db import models
 
 # Import the needed classes.
 from .forms import RequestForm
@@ -75,19 +76,30 @@ class AstroImageList(ListView):
     """
     Astro Image List: Renders a list of images.
     """
-    # Set the template, model, and order by.
     template_name = "mainsite/images-list.html"
     model = AstroImage
     ordering = ["-date_taken"]
     context_object_name = "images"
     paginate_by = 9
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get('q')
+        
+        if search_query:
+            queryset = queryset.filter(
+                models.Q(object__icontains=search_query) |
+                models.Q(location__icontains=search_query) |
+                models.Q(telescope__icontains=search_query) |
+                models.Q(comment__icontains=search_query)
+            )
+        return queryset
 
-    # Add the title and path to the page.
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Full List of Images"
         context["path"] = "/images"
+        context["search_query"] = self.request.GET.get('q', '')
         return context
     
 

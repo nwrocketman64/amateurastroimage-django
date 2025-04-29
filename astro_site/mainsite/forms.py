@@ -1,7 +1,7 @@
 from django import forms
 from captcha.fields import CaptchaField
 
-from .models import Request
+from .models import Request, Comment
 
 class RequestForm(forms.ModelForm):
     """
@@ -46,5 +46,33 @@ class RequestForm(forms.ModelForm):
             },
             "comment": {
                 "required": "A comment or question is required",
+            },
+        }
+
+class CommentForm(forms.ModelForm):
+    """
+    Comment Form: Defines the form for adding comments to images
+    """
+    captcha = CaptchaField(label="ReCaptcha")
+
+    class Meta:
+        model = Comment
+        fields = ['name', 'email', 'content']
+        labels = {
+            'name': 'Your Name',
+            'email': 'Email',
+            'content': 'Comment',
+        }
+        error_messages = {
+            'name': {
+                'required': 'Please enter your name',
+                'max_length': 'Please enter a shorter name',
+            },
+            'email': {
+                'required': 'Your email is required',
+                'max_length': 'Please enter a shorter email',
+            },
+            'content': {
+                'required': 'Comment cannot be empty',
             },
         }

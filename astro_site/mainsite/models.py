@@ -94,3 +94,29 @@ class Request(models.Model):
 
         # Save everything else.
         super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    """
+    Comment: Model for storing user comments on astronomical images
+    """
+    image = models.ForeignKey(AstroImage, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(editable=False)
+    
+    def save(self, *args, **kwargs):
+        # Set sent time to the current time.
+        self.created_at = datetime.now()
+
+        # Save everything else.
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        # Convert from UTC time to the proper timezone.
+        current_zone = timezone(settings.TIME_ZONE)
+        local_time = self.created_at.astimezone(current_zone)
+
+        # Return the correct string.
+        return f"Comment by {self.name} on {local_time.strftime('%A, %b %d, %Y - %I:%M %p')}"

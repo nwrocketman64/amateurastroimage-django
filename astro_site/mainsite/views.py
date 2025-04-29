@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.db import models
 
 # Import the needed classes.
-from .forms import RequestForm
+from .forms import RequestForm, CommentForm
 from .models import AstroImage, Request
 
 # Create your views here.
@@ -111,13 +111,31 @@ class AstroImageDetails(DetailView):
     model = AstroImage
     context_object_name = "image"
 
-
-    # Add the title and path to the page.
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "View of"
         context["path"] = "/images"
+        context["form"] = CommentForm()
+        context["comments"] = self.object.comments.all().order_by('-created_at')
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentForm(request.POST)
+        
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.image = self.object
+            comment.save()
+            return self.redirect_to_image()
+        
+        context = self.get_context_data(object=self.object)
+        context["form"] = form
+        return self.render_to_response(context)
+    
+    def redirect_to_image(self):
+        from django.shortcuts import redirect
+        return redirect('astroimage-details', pk=self.object.pk)
     
 
 class AboutPage(TemplateView):

@@ -38,6 +38,7 @@
     </table>
     <p class="download-button-container"><a role="button" href="{{ image.image.url }}" download>Full Size Download</a></p>
 </section>
+{% comment %}
 <section>
     <hr>
     <h2>Comments</h2>
@@ -57,6 +58,7 @@
         <p>No comments yet. Be the first to comment!</p>
     {% endif %}
     <hr>
+{% endcomment %}
     <h3>Add a Comment</h3>
     <form method="post">
         {% csrf_token %}

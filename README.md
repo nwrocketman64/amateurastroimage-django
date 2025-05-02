@@ -44,16 +44,17 @@ I used [VS code](https://code.visualstudio.com/) as the main IDE for creating th
 # Libraries Used
 The key libraries used in this project.
 
-* [Python Django](https://www.djangoproject.com/) - The main backend web framework.
 * [Django Cleanup](https://pypi.org/project/django-cleanup/) - Used to clean up images with records deleted from database.
 * [Django Environ](https://pypi.org/project/django-environ/) - Used to load configurations into the enviroment.
 * [Django Extensions](https://pypi.org/project/django-extensions/) - Adds development extenstions to the Python Django Framework.
 * [Django ImageKit](https://pypi.org/project/django-imagekit/) - Used to create cached thumbnails of the image.
 * [Django Simple Captcha](https://pypi.org/project/django-simple-captcha/) - Provided basic ReCaptcha for the contact form.
+* [Lightbox2](https://lokeshdhakar.com/projects/lightbox2/) - Creates an elegant and responsive lightbox gallery for image viewing.
 * [MySQL Client](https://pypi.org/project/mysqlclient/) - Provides a connection to the MariaDB database.
 * [Normalize.css](https://necolas.github.io/normalize.css/) - It is used in the Pico.css framework.
 * [Pico.css V2](https://picocss.com/) - The lightweight CSS framework that I used for the this website.
 * [Pillow](https://pypi.org/project/pillow/) - Is used to add watermarks to the images.
+* [Python Django](https://www.djangoproject.com/) - The main backend web framework.
 * [PYTZ (Python Timezone)](https://pypi.org/project/pytz/) - Used to fix timezone issues in the code.
 
 # Website Link

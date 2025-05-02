@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block main-title %}{{ title }} {{ image.object }} - Amateur Astro Image{% endblock %}
 
 {% block addons %}
+<link href="{% static "mainsite/lightbox2/css/lightbox.min.css" %}" rel="stylesheet" />
 <meta name="description" content="{{ image.object }} - {{ image.comment }}">
 <meta name="author" content="Amateur Astro Image Team">
+{% endblock %}
+
+{% block endAddon %}
+<script src="{% static "mainsite/lightbox2/js/lightbox-plus-jquery.min.js" %}"></script>
 {% endblock %}
 
 {% block content %}
 <section>
     <article>
     <h1>{{ title }} {{ image.object }}</h1>
-    <img src="{{ image.image_standard.url }}" alt="{{ image.object }} - {{ image.date | date }}">
+    <a href="{{ image.image.url }}" data-lightbox="image-{{ image.id }}" data-title="{{ image.object }} - {{ image.date_taken|date:"Y-m-dH:i:s" }}">
+        <img src="{{ image.image_standard.url }}" alt="{{ image.object }} - {{ image.date_taken|date:"Y-m-dH:i:s" }}">
+    </a>
     </article>
     <h2>Details for the Image</h2>
     <table class="striped">
@@ -20,7 +29,7 @@
             <td>{{ image.object }}</td>
         </tr>
         <tr>
-            <td>Date and Time</td>
+            <td>Date and Time Taken</td>
             <td><time datetime="{{ image.date_taken|date:"Y-m-dH:i:s" }}">{{ image.date_taken|date:"D, F j, Y, g:i a" }}</time></td>
         </tr>
         <tr>
@@ -38,8 +47,8 @@
     </table>
     <p class="download-button-container"><a role="button" href="{{ image.image.url }}" download>Full Size Download</a></p>
 </section>
-{% comment %}
 <section>
+{% comment %}
     <hr>
     <h2>Comments</h2>
     {% if comments %}

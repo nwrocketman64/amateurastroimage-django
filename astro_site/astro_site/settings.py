@@ -183,6 +183,7 @@ CONTENT_SECURITY_POLICY = {
             "'self'",                         # Local images (/media/..., /static/...)
             "https://i.creativecommons.org",  # Creative Commons badge
             "https://licensebuttons.net",     # Added for Creative Commons image
+            "data:",                          # Allow base64 encoded images
         ),
         'font-src': (
             "'self'",                  # Local fonts (if any)

@@ -12,6 +12,7 @@
 
 {% block endAddon %}
 <script src="{% static "mainsite/lightbox2/js/lightbox-plus-jquery.min.js" %}"></script>
+<script src="{% static "mainsite/js/formButton.min.js" %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -80,7 +81,7 @@
             {% endif %}
         </div>
         {% endfor %}
-        <button type="submit">Submit Comment</button>
+        <button id="sendForm" type="submit">Submit Comment</button>
     </form>
 </section>
 {% endblock %}

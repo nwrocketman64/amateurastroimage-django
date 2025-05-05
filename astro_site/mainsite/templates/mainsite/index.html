@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block main-title %}Amateur Astro Image{% endblock %}
 
 {% block addons %}
+<link href="{% static "mainsite/lightbox2/css/lightbox.min.css" %}" rel="stylesheet" />
 <meta name="description" content="Welcome to my website, Amateur Astro Image, where I display all the images that I have to take through my telescopes.">
 <meta name="author" content="Amateur Astro Image Team">
+{% endblock %}
+
+{% block endAddon %}
+<script src="{% static "mainsite/lightbox2/js/lightbox-plus-jquery.min.js" %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +24,9 @@
     {% if image %}
     <article>
         <h2>The Latest Image</h2>
-        <img src="{{ image.image_standard.url }}" alt="{{ image.object }} - {{ image.date_taken|date:"F j, Y, g:i a" }}">
+        <a href="{{ image.image.url }}" data-lightbox="latest-image" data-title="{{ image.object }} - {{ image.date_taken|date:"F j, Y, g:i a" }}">
+            <img src="{{ image.image_standard.url }}" alt="{{ image.object }} - {{ image.date_taken|date:"F j, Y, g:i a" }}">
+        </a>
         <br>
         <small>
             {{ image.object }} - taken on <time datetime="{{ image.date_taken|date:"Y-m-dH:i:s" }}">{{ image.date_taken|date:"F j, Y, g:i a" }}</time>

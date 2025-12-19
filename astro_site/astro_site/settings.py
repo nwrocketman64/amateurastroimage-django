@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.utils.csp import CSP
 
 import environ
 
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'mainsite',
     'captcha',
     'imagekit',
-    'csp',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,8 +57,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'csp.middleware.CSPMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csp.ContentSecurityPolicyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -170,25 +170,23 @@ SECURE_SSL_REDIRECT = env('HTTPS') == 'TRUE'               # Redirect HTTP to HT
 
 
 # CSP Configuration (Enforced, no reporting)
-CONTENT_SECURITY_POLICY = {
-    'DIRECTIVES': {
-        'default-src': ("'self'",),  # Default to same-origin only (amateurastroimage.com)
-        'script-src': ("'self'",),   # All JavaScripts are local (e.g., /static/mainsite/js/...)
-        'style-src': (
-            "'self'",                  # Local styles (/static/mainsite/css/style.min.css)
-            "https://fonts.googleapis.com",  # Google Fonts CSS
-            "https://cdn.jsdelivr.net",      # Pico CSS
-        ),
-        'img-src': (
-            "'self'",                         # Local images (/media/..., /static/...)
-            "https://i.creativecommons.org",  # Creative Commons badge
-            "https://licensebuttons.net",     # Added for Creative Commons image
-            "data:",                          # Allow base64 encoded images
-        ),
-        'font-src': (
-            "'self'",                  # Local fonts (if any)
-            "https://fonts.gstatic.com",  # Google Fonts font files
-        ),
-        'connect-src': ("'self'",),  # Local API calls (no external APIs detected)
-    }
+SECURE_CSP = {
+    "default-src": [CSP.SELF],  # Default to same-origin only (amateurastroimage.com)
+    "script-src": [CSP.SELF],   # All JavaScripts are local (e.g., /static/mainsite/js/...)
+    "style-src": [
+        CSP.SELF,                  # Local styles (/static/mainsite/css/style.min.css)
+        "https://fonts.googleapis.com",  # Google Fonts CSS
+        "https://cdn.jsdelivr.net",      # Pico CSS
+    ],
+    "img-src": [
+        CSP.SELF,                         # Local images (/media/..., /static/...)
+        "https://i.creativecommons.org",  # Creative Commons badge
+        "https://licensebuttons.net",     # Added for Creative Commons image
+        "data:",                          # Allow base64 encoded images
+    ],
+    "font-src": [
+        CSP.SELF,                  # Local fonts (if any)
+        "https://fonts.gstatic.com",  # Google Fonts font files
+    ],
+    "connect-src": [CSP.SELF],  # Local API calls (no external APIs detected)
 }

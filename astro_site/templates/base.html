@@ -20,10 +20,10 @@
                 <li><a href="{% url "index-page" %}" id="header-name">Amateur Astro Image</a></li>
             </ul>
             <ul>
-                <li><a {% if '/home' in path %} id="thePage" {% endif %} href="{% url "index-page" %}">Home</a></li>
-                <li><a {% if '/images' in path %} id="thePage" {% endif %} href="{% url "astroimages-list" %}">Images</a></li>
-                <li><a {% if '/contact' in path %} id="thePage" {% endif %} href="{% url "contact-page" %}">Contact</a></li>
-                <li><a {% if '/about' in path %} id="thePage" {% endif %} href="{% url "about-page" %}">About</a></li>
+                <li><a {% if '/home' in path %} id="thePage" aria-current="page" {% endif %} href="{% url "index-page" %}">Home</a></li>
+                <li><a {% if '/images' in path %} id="thePage" aria-current="page" {% endif %} href="{% url "astroimages-list" %}">Images</a></li>
+                <li><a {% if '/contact' in path %} id="thePage" aria-current="page" {% endif %} href="{% url "contact-page" %}">Contact</a></li>
+                <li><a {% if '/about' in path %} id="thePage" aria-current="page" {% endif %} href="{% url "about-page" %}">About</a></li>
             </ul>
         </nav>
     </header>
